@@ -1,0 +1,91 @@
+---
+title: "Package mvtsar"
+author: "Yuzhe Zhang"
+date: "`r Sys.Date()`"
+output: rmarkdown::pdf_document
+vignette: >
+  %\VignetteIndexEntry{Package mvtsar}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## 1 Introduction
+Package `mvtsar`, whose full name is "matrix-valued time series autoregressive", implements the four algorithms proposed in paper "Autoregressive models for matrix-valued time series". The package is written by complete C++ languague, which relies on two interface package `Rcpp` and `RcppArmadillo`, in order to pursue high computing efficiency. The package contains four algorithms, including VAR, projection method, iterative least squares and maximum likelihood estimate. They will be introduced in the following section.
+
+## 2 Details
+Consider the matrix-valued time series autoregressive model. Specifically, in this model, the conditional mean of the matrix observation at time $t$ is obtained by multiplying the previous observed matrix at time $t-1$ from both left and right by two autoregressive coefficient matrices. Let $\boldsymbol{X}_t$ be the $m \times n$ matrix observed at time $t$, our model takes the form
+$$
+\boldsymbol { X } _ { t } = \boldsymbol { A X } _ { t - 1 } \boldsymbol { B } ^ { \prime } + \boldsymbol { E } _ { t }.
+$$
+
+We assume that $\text{Cov}(\text{vec}(E_t)) = \Sigma_c \otimes \Sigma_r$, where $\Sigma_r$ and $\Sigma_c$ are $m \times m$ and $n \times n$ symmetric positive definite matrices. $\Sigma_r$ corresponds to row-wise covariances and $\Sigma_c$ introduces column-wise covariances.
+
+### Projection method
+The projection method is to solve the following optimization problem
+$$
+\left( \hat { \boldsymbol { A } } _ { 1 } , \hat { \boldsymbol { B } } _ { 1 } \right) = \arg \min _ { \boldsymbol { A } , \boldsymbol { B } } \| \hat { \Phi } - \boldsymbol { B } \otimes \boldsymbol { A } \| _ { F } ^ { 2 },
+$$
+where $\hat{\Phi}$ is the MLE or LS estimate of model 
+$$
+\operatorname { vec } \left( \boldsymbol { X } _ { t } \right) = \Phi \operatorname { vec } \left( \boldsymbol { X } _ { t - 1 } \right) + \operatorname { vec } \left( \boldsymbol { E } _ { t } \right).
+$$
+For more details, see the reference paper.
+
+### Iterated least squares
+The Iterated least squares is to solve the following optimization problem
+$$
+\min _ { A , B } \sum _ { t } \left\| X _ { t } - A X _ { t - 1 } B ^ { \prime } \right\| _ { F } ^ { 2 }.
+$$
+To solve it, we iteratively update two matrices $\hat{A}$ and $\hat{B}$ 
+$$
+\boldsymbol { B } \leftarrow \left( \sum _ { t } \boldsymbol { X } _ { t } ^ { \prime } \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \right) \left( \sum _ { t } \boldsymbol { X } _ { t } ^ { \prime } \boldsymbol { A } ^ { \prime } \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \right) ^ { - 1 },
+$$
+
+$$
+\boldsymbol { A } \leftarrow \left( \sum _ { t } \boldsymbol { X } _ { t } \boldsymbol { B } \boldsymbol { X } _ { t - 1 } ^ { \prime } \right) \left( \sum _ { t } \boldsymbol { X } _ { t - 1 } \boldsymbol { B } ^ { \prime } \boldsymbol { B } \boldsymbol { X } _ { t - 1 } ^ { \prime } \right) ^ { - 1 }.
+$$
+
+### Maximum likelihood estimate
+To find the MLE, we iteratively update one, while keeping the other three fixed. These iterations are given by
+$$
+\begin{aligned} \boldsymbol { A } & \leftarrow \left( \sum _ { t } \boldsymbol { X } _ { t } \Sigma _ { c } ^ { - 1 } \boldsymbol { B } \boldsymbol { X } _ { t - 1 } ^ { \prime } \right) \left( \sum _ { t } \boldsymbol { X } _ { t - 1 } \boldsymbol { B } ^ { \prime } \Sigma _ { c } ^ { - 1 } \boldsymbol { B } \boldsymbol { X } _ { t - 1 } ^ { \prime } \right) ^ { - 1 } \\ \boldsymbol { B } & \leftarrow \left( \sum _ { t } \boldsymbol { X } _ { t } ^ { \prime } \Sigma _ { r } ^ { - 1 } \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \right) \left( \sum _ { t } \boldsymbol { X } _ { t - 1 } ^ { \prime } \boldsymbol { A } ^ { \prime } \Sigma _ { r } ^ { - 1 } \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \right) ^ { - 1 } \\ \Sigma _ { c } & \leftarrow \frac { \sum _ { t } \boldsymbol { R } _ { t } ^ { \prime } \Sigma _ { r } ^ { - 1 } \boldsymbol { R } _ { t } } { m ( T - 1 ) } , \text { where } \boldsymbol { R } _ { t } = \boldsymbol { X } _ { t } - \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \boldsymbol { B } ^ { \prime } \\ \Sigma _ { r } & \leftarrow \frac { \sum _ { t } \boldsymbol { R } _ { t } \Sigma _ { c } ^ { - 1 } \boldsymbol { R } _ { t } ^ { \prime } } { n ( T - 1 ) } , \text { where } \boldsymbol { R } _ { t } = \boldsymbol { X } _ { t } - \boldsymbol { A } \boldsymbol { X } _ { t - 1 } \boldsymbol { B } ^ { \prime } \end{aligned}.
+$$
+
+
+## An example
+We generate a virtual dataset $X$, which is of dimension $(m, n, t)$, where $t$ is the number of observations.
+```{r}
+library(StatComp20081)
+X <- array(1:24, dim = c(2, 3, 4))
+VAR(X)
+```
+
+```{r}
+PROJ(X)
+```
+
+```{r}
+A.init <- matrix(1:4, 2, 2)
+B.init <- matrix(1:9, 3, 3)
+max.iters <- 200
+ILS(X, A.init, B.init, max.iters)
+```
+
+```{r}
+A.init <- matrix(1:4, 2, 2)
+B.init <- matrix(1:9, 3, 3)
+sigmar.init <- diag(3)
+sigmac.init <- diag(2)
+max.iters <- 200
+MLE(A.init, B.init, sigmac.init, sigmar.init, X, max.iters)
+```
+
+## Refernces
+R. Chen, H. Xiao and D. Yang, Autoregressive models for matrix-valued time series. Journal of Econometrics (2020), https://doi.org/10.1016/j.jeconom.2020.07.015
