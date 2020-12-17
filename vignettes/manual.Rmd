@@ -2,7 +2,7 @@
 title: "Package mvtsar"
 author: "Yuzhe Zhang"
 date: "`r Sys.Date()`"
-output: rmarkdown::pdf_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Package mvtsar}
   %\VignetteEngine{knitr::rmarkdown}

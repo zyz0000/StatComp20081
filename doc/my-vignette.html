@@ -12,7 +12,7 @@
 
 <meta name="author" content="20081" />
 
-<meta name="date" content="2020-12-10" />
+<meta name="date" content="2020-12-17" />
 
 <title>Homework Vignette</title>
 
@@ -32,6 +32,54 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -319,7 +367,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Homework Vignette</h1>
 <h4 class="author">20081</h4>
-<h4 class="date">2020-12-10</h4>
+<h4 class="date">2020-12-17</h4>
 
 
 
@@ -399,75 +447,69 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">0.2</td>
 <td align="left">setosa</td>
 </tr>
-<tr class="even">
-<td align="right">The following t</td>
-<td align="right">able gives a s</td>
-<td align="right">ummary of `iris</td>
-<td align="right">` dataset.</td>
-<td align="left"></td>
-</tr>
 </tbody>
 </table>
+<p>The following table gives a summary of <code>iris</code> dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">summary</span>(iris))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th align="center">Sepal.Length</th>
-<th align="center">Sepal.Width</th>
-<th align="center">Petal.Length</th>
-<th align="center">Petal.Width</th>
-<th align="center">Species</th>
+<th align="left"></th>
+<th align="left">Sepal.Length</th>
+<th align="left">Sepal.Width</th>
+<th align="left">Petal.Length</th>
+<th align="left">Petal.Width</th>
+<th align="left">Species</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td align="center">Min. :4.300</td>
-<td align="center">Min. :2.000</td>
-<td align="center">Min. :1.000</td>
-<td align="center">Min. :0.100</td>
-<td align="center">setosa :50</td>
+<td align="left"></td>
+<td align="left">Min. :4.300</td>
+<td align="left">Min. :2.000</td>
+<td align="left">Min. :1.000</td>
+<td align="left">Min. :0.100</td>
+<td align="left">setosa :50</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">1st Qu.:5.100</td>
-<td align="center">1st Qu.:2.800</td>
-<td align="center">1st Qu.:1.600</td>
-<td align="center">1st Qu.:0.300</td>
-<td align="center">versicolor:50</td>
+<td align="left"></td>
+<td align="left">1st Qu.:5.100</td>
+<td align="left">1st Qu.:2.800</td>
+<td align="left">1st Qu.:1.600</td>
+<td align="left">1st Qu.:0.300</td>
+<td align="left">versicolor:50</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">Median :5.800</td>
-<td align="center">Median :3.000</td>
-<td align="center">Median :4.350</td>
-<td align="center">Median :1.300</td>
-<td align="center">virginica :50</td>
+<td align="left"></td>
+<td align="left">Median :5.800</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :4.350</td>
+<td align="left">Median :1.300</td>
+<td align="left">virginica :50</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Mean :5.843</td>
-<td align="center">Mean :3.057</td>
-<td align="center">Mean :3.758</td>
-<td align="center">Mean :1.199</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">Mean :5.843</td>
+<td align="left">Mean :3.057</td>
+<td align="left">Mean :3.758</td>
+<td align="left">Mean :1.199</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td align="center">3rd Qu.:6.400</td>
-<td align="center">3rd Qu.:3.300</td>
-<td align="center">3rd Qu.:5.100</td>
-<td align="center">3rd Qu.:1.800</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">3rd Qu.:6.400</td>
+<td align="left">3rd Qu.:3.300</td>
+<td align="left">3rd Qu.:5.100</td>
+<td align="left">3rd Qu.:1.800</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
-<td></td>
-<td align="center">Max. :7.900</td>
-<td align="center">Max. :4.400</td>
-<td align="center">Max. :6.900</td>
-<td align="center">Max. :2.500</td>
-<td align="center">NA</td>
+<td align="left"></td>
+<td align="left">Max. :7.900</td>
+<td align="left">Max. :4.400</td>
+<td align="left">Max. :6.900</td>
+<td align="left">Max. :2.500</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -821,13 +863,12 @@ f_Y(y) = \frac12 \times \frac32(1-y^2) = \frac34(1-y^2), y \in (-1,1).
 <span id="cb18-11"><a href="#cb18-11"></a>}</span></code></pre></div>
 <p>We can make a plot of the power vs. degrees of freedom.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">library</span>(ggpubr)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; 载入需要的程辑包：magrittr</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">df=</span><span class="kw">rep</span>(ab, <span class="dt">time=</span><span class="dv">2</span>), </span>
-<span id="cb19-4"><a href="#cb19-4"></a>                <span class="dt">pwr=</span><span class="kw">c</span>(pwr.beta, pwr.t),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>                <span class="dt">dis=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Beta&quot;</span>, <span class="st">&quot;t&quot;</span>), <span class="dt">each=</span><span class="dv">10</span>))</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">ggline</span>(d, <span class="dt">x=</span><span class="st">&quot;df&quot;</span>, <span class="dt">y=</span><span class="st">&quot;pwr&quot;</span>, <span class="dt">group=</span><span class="st">&quot;dis&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dis&quot;</span>, <span class="dt">shape=</span><span class="st">&quot;dis&quot;</span>, </span>
-<span id="cb19-7"><a href="#cb19-7"></a>       <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>), </span>
-<span id="cb19-8"><a href="#cb19-8"></a>       <span class="dt">xlab=</span><span class="st">&quot;Parameter&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;power&quot;</span>) <span class="op">+</span><span class="st"> </span>ggthemes<span class="op">::</span><span class="kw">theme_economist</span>()</span></code></pre></div>
+<span id="cb19-2"><a href="#cb19-2"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">df=</span><span class="kw">rep</span>(ab, <span class="dt">time=</span><span class="dv">2</span>), </span>
+<span id="cb19-3"><a href="#cb19-3"></a>                <span class="dt">pwr=</span><span class="kw">c</span>(pwr.beta, pwr.t),</span>
+<span id="cb19-4"><a href="#cb19-4"></a>                <span class="dt">dis=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Beta&quot;</span>, <span class="st">&quot;t&quot;</span>), <span class="dt">each=</span><span class="dv">10</span>))</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">ggline</span>(d, <span class="dt">x=</span><span class="st">&quot;df&quot;</span>, <span class="dt">y=</span><span class="st">&quot;pwr&quot;</span>, <span class="dt">group=</span><span class="st">&quot;dis&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dis&quot;</span>, <span class="dt">shape=</span><span class="st">&quot;dis&quot;</span>, </span>
+<span id="cb19-6"><a href="#cb19-6"></a>       <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>), </span>
+<span id="cb19-7"><a href="#cb19-7"></a>       <span class="dt">xlab=</span><span class="st">&quot;Parameter&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;power&quot;</span>) <span class="op">+</span><span class="st"> </span>ggthemes<span class="op">::</span><span class="kw">theme_economist</span>()</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAApVBMVEUAAAAAADUAAF4AMzUAM14AM4QAW6gwAAAwADUwAF4wMwAwMzUwM14wW14wW4QwW6gwgMlVAABVADVVMwBVM15VgMlVo8lVo+t4MwB4W154gDV4gF54gKh4o4R4o8l4xKh4xOuYWwCYWzWYgDWYo4SYo8mYxISYxOuY5Ou3gDW3o163o4S3xMm35Ki35OvVo17VxITVxKjVxMnV5KjV5MnV5Ov///+kJA+aAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAKM0lEQVR4nO2dCZebNhRG8aSxkzZtPUnbcbfUdJshbcZObef//7RqwxZY4pNAAiG/e07mGMIiXWsDnkVxIjoppk5A6pAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCBAwoKqQvDNY2Pt/rsn7yP12admHEG7u6f9q63nTkpQcdfIXXXnn9k++9SMJqg7FaZkyGwdfy8ertd2Hct2pH4kIYiXk+u1Klv71Zr9/fSuKN48no4btilb/vBlUSy+txyrtabepx/xBR3ui8XPsortVyypD1dbyJp0tVqVoD8W25Pcs1hsVWZV7bs+1AwFHe7X7J8QJJqh/UrLVnGFtmfdBq15Hhc/nE7/rJZS23Fz98iPtNSPVP+TR2keKeUqJmpXJQW9tqTTUsWUoG+fVTUTGVWZ/ffPH1fF8nonY2FMWlD18pl92a9FFSsLU55OnY306QPbZ6dcsdom1soaZzjYdTnUjtSLUQWJBsk5sXW2yrunliB2lK9/+evjvdm2/Uh9GKeKaeOgw72paTWhCdIaLr5WLjbaIKcj9WGERnpZN9LClfuA8VzFXj6zRvo96+o3vA1a8N5w+cw7fl44nY608B2kXhi1m9/JWuJI3Ujz3nx37tDY2rXouBnOglLu5vujBL0RRvdsoPiCdfWnw7ti+cyHjV+8L11rjtinZyoSFpQGJAhAggAkCECCACQIQIIAJAhAggAkCECCACQIQIIAJAhAggAkCECCACQIQIIAJAhAggAkCECCACQIQIIAJAhAggAkCECCACQIMFhQ7oaHC8rc0NDsGQN4cyKAoLwNDcyd+UcEORFCUNaGQObKSygpDy11DSvNiG5BFQ9RluHaxw2zU5oMZV2AunMnouLVb73kT3VMUeA3LEj4UL8daAr6nDEegkThUYKaVWzqTMTEX5AK4y+tjXTOlcy5BPEfpRw35uD/mxWkt0GeP9XJBudejASZKC/jIF7FzOMgfJg5g0fSS96DrcXvvuwj6ZsVRJAgQDBBuZomQYBc8xUMEgQIKChP1yQIkGeuAkKCAEEF5WibBAFyzFNQSBAgsKD8fJMgQH45CgwJAgQXlJtxEgTILT/BIUGACILyck6CAHnlJgLuMYod4S854xyjeCrXHc/mfQ46LwLEKHoedGa4xwc1Cs/UYXIx8RCkR5hVy532igt4lmKEnETCX5CIUSx5HMzOtZXOJ/zeuQSJ9tl5OvEbEaS3QRXvzFwFZfQLDr8YxcNbtxjFWxGkxyiKMLzKcRyU0Y+A3GMUfX/tk4efXLIRDxIEiCkoC/kkCJBFJmJCggAGQceN6+uJeh1+Zhhy4P7+pl6HnxmmHDiOl28DYwkyvd/0VoleB+ZeyeKnf+aGjMmviuKBGiKJSVD58uP9w/lxz41j7uZ5T4/ezzzoHPOBBAHM46CP3FHv9yZmhfHb3RVDXh+dFyMV//nWMvNIOtzFmP00M8GUcvmeV7rSEFi/WttML7eGRdCuCF3N5lrJLFUswnXGTA1FvmE2f4zfa3mLwYgWLAV/v5JtUDNwc+D8SsUcq5k9yfxl5XoQJ2+bBrzY/jTTiXFNKWbFR15r6OEvjOrFwBKUiSA2klbXYXoAFVt6/fdZUK/gP6E9cEBhBKCgC3oIHn9cth8kSEUNhc5PcBwEVepqvjHRZLW8xUnwzPeDai96Cdq/fgojaGbNkH2gyOw0gjhlBQkwhpyXoU5BrV6MqpjiXMX0IE5OMEEzKkSdjXQjiPMUsgTNx9B8UjoR0wmayVdjr2LR73nMw1B3I010d/NTnD01phUkT5+0JlPidovtmFUs7ZsgHSF4Iz0bS/wu0fRpS/yXU9MnjQSBBCT+47t0U5YI6QhKJyUNEkpWQknRSCtVaaVGkFiSEkvOKcUUJUZ6ghJLUWLJ4aSVpLRSU1OckklZIsloUyRzjZ9GKq5J5vIjjVRck8wFWhKJuKZI5ho2gSR0MX3y8PQ4dYwiv9E4RWz5xI66T1+5vgQyJsWkkjpP3Ziii9/Jnyy8o7j6MPqZTTRjFE/TvgxbxO6NEcLnIagRo8iZ9GXYhQxzjH4ef0HnB2TVsDjp4UzQ9fuUoCp+QAOgHhxdpTqeNY82qJy6/Gi0JEUsV869mIz5SAkuSSV/KkF6jGKyAZxFEbVpwiNpFaMYLgw4PBMKmgWXK9tWbkJkLgdBGlq7FKhlykyQQpYmEtSNrWXyy3L+gtqSPMtVvoL0e5J6A24RZBORr6Ariq4xk7Vc3ZAgyWVI0BgWkCBF62FALco+1Lw1QRZIUDcdD5lIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFyFmS5+vRYe5qdINs9CePNedutQ+e14n/cExcLj6/U9pzCtNp8B8Nnrfwv49oz8G3hPl/p4C/ako/WTcLemHNiXFujTzTZnHSyM3fDMz0gz30S0beK6eEv7em6OnIXPNMoH9bVpkyFbKT1AKpmMFUdNtifS+hhYYo7NK/9bAlRDBq56CFID8FrhuPBfOgG4MamZPbOc8/9Lrv5C1q3P+v740a6MK6F9O1fe+7Xq4rZS1CIU8fZbVRB9jYoxKnj7DaqINiLDTp1nN1GFdSYaLI0jYOGnDrObuMKakw0KT+HO3Wc3UYWZD1cxgQRdDuQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCxBOkz/Uh3jflNq1FY1PjkyYjO3kd9eB3usPbbfs07VNGE9SY62PnPueHvqnxSVMH3qeTP+TufLgVTVBjro/KPZfapr736Hb179YdT8fK+GKLbgvGbYNqQaX77Obapp53eS/fvOPpdktxhu4by3EFqTJ/uP/Kde4hfVPP5wTnAuR+OuGj+9FEVEH1XB/71Vq+fwujb2p50mSjrAuQ++l0QZaHWzEFNef68Hgi0utJU2tDp/2mLUGtuT78Bfm1Qa3W3F3QVG2QNteH/F7ebrs2N2zq14tV577d/XQXH+P3YvpcH8fNg+vgpLGp15OmUnsfrOvpZCI7H25FE1TP9SEeGfFRtePgTW3q/aRJvQPN73TqW+x6uEXXYgASBJhe0HEj6qLf9FafHmMlp00KgkTj4TXB1YizPSUjyCuy5lYFifs4a3aV8BO7lKoXXv3KPqz50oOsj/K/1uqz2jpa8pIRVKr33lY8/0tVosQC67Ar3muzBTFEYSNCXoLOn1e9Yk5cSUGQaKRZIfiPD11Y3vcr5qaxIP+82taXSlzQ+fMq6rxqKQi6XDvvRHemWhhtof6jRp9rvqx/jkhKgg73rK/nhUZeIWkLZ0FqfCwEaZ8jkpIgcfm0U4WmsVD/qe+JiSqmfY5IUoJ4mVnVgvSF+s9xw7Sx/+EteP35hgTxC8XFb7IJbi6c//AWnZeckl1Rqs/ZC0ocEgQgQQASBCBBABIEIEEAEgQgQQASBCBBABIEIEEAEgQgQQASBIj/uq6Z8z9q9lnne5vr6QAAAABJRU5ErkJggg==" /><!-- --></p>
 <p>For Beta<span class="math inline">\((\alpha, \alpha)\)</span> distribution, the power of the test is constantly small for <span class="math inline">\(\alpha\)</span> varying from 1 to 10. But for <span class="math inline">\(t(\nu)\)</span> distribution, the test is more powerful when the degrees of freedom are small. As <span class="math inline">\(\nu\)</span> grows larger, the power tends to <span class="math inline">\(\alpha\)</span>.</p>
 </div>
