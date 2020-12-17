@@ -10,7 +10,7 @@ Description: This package implements the algorithms in paper
               Journal of Econometrics (2020), https://doi.org/10.1016/j.jeconom.2020.07.015., 
               including Var, projection method, iterated least squares and maximum likelihood estimate.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.0), RcppArmadillo, MASS, grid, ggplot2, caret, e1071, dplyr, ggpubr, boot, bootstrap, DAAG, coda, microbenchmark
+Imports: Rcpp (>= 1.0.0), RcppArmadillo, MASS, grid, ggplot2, caret, e1071, dplyr, ggpubr, boot, bootstrap, DAAG, coda, microbenchmark, ggthemes
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 encoding: UTF-8
